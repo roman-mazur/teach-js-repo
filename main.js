@@ -1,14 +1,20 @@
+var wallet = [];
+
 document.getElementById('run-btn').onclick = function() {
   var inputString = document.getElementById('text-field').value;
   var resultNumber = parseInt(inputString);
-  
-  if (resultNumber % 2 == 0 && resultNumber % 3 == 0) {
-    console.log("ділиться на 2 і на 3");
-  } else if(resultNumber % 2 == 0) {
-    console.log("even");
-  } else {
-    console.log("odd");
-  }
+  wallet.push(resultNumber);
+  console.log(wallet);  
 
-  console.log(resultNumber);
+
+  var maxNum = 0;
+  var sum = 0;
+  for (i = 0; i < wallet.length; i++) {
+    sum = sum + wallet[i];
+    if (maxNum < wallet[i]) {
+      maxNum = wallet[i];
+    }
+  }
+  console.log("Max coin: " + maxNum);
+  console.log("Total in wallet: " + sum + " cents");
 };
