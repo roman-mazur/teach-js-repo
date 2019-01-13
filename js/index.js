@@ -26,37 +26,30 @@ var checkNominal = function(value, checkArray) {
   return false;
 };
 
-document.getElementById('add-btn-coin').onclick = function() {
-  var inputString = document.getElementById('text-field-coin').value;
-  var inputNumber = parseInt(inputString);
+function getInputNumber(id) {
+  return parseInt(document.getElementById(id).value);
+}
 
-  if (!checkNominal(inputNumber, checkCoinArray)) {
+function handleClick(nameId, selectArray, selectTarget) {
+  var inputNumber = getInputNumber(nameId); 
+  console.log("inputNumber = " + inputNumber);
+  if (!checkNominal(inputNumber, selectArray)) {
     console.error("Невірний номінал");
     return;
   } else {
     console.log("Номінал вірний");
   }
 
-  wallet.coins.push(inputNumber);
+  selectTarget.push(inputNumber);
   console.log(wallet);
 
   console.log("Total in wallet: " + wallet.sum() + " cents");
+}
+
+document.getElementById('add-btn-coin').onclick = function() {
+  handleClick('text-field-coin', checkCoinArray, wallet.coins);
 };
 
 document.getElementById('add-btn-banknot').onclick = function() {
-  var inputString = document.getElementById('text-field-banknot').value;
-  var inputNumber = parseInt(inputString);
-
-
-  if (!checkNominal(inputNumber, checkBanknotArray)) {
-    console.error("Невірний номінал");
-    return;
-  } else {
-    console.log("Номінал вірний");
-  }
-
-  wallet.banknots.push(inputNumber);
-  console.log(wallet);  
-
-  console.log("Total in wallet: " + wallet.sum() + " cents");
+  handleClick('text-field-banknot', checkBanknotArray, wallet.banknots);
 };
